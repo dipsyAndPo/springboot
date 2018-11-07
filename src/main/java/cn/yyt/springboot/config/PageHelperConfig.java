@@ -19,7 +19,7 @@ public class PageHelperConfig {
         p.setProperty("offsetAsPageNum","true");
         //rowBoundsWithCount:设置为true时，使用RowBounds分页会进行count查询.
         p.setProperty("rowBoundsWithCount","true");
-        //reasonable：启用合理化时，如果pageNum<1会查询第一页，如果pageNum>pages会查询最后一页。
+        //reasonable：分页合理化参数：启用合理化时，如果pageNum<1会查询第一页，如果pageNum>pages会查询最后一页。(第一页的时候点击上一页还是会查询第一页，不会报错)
         p.setProperty("reasonable","true");
         page.setProperties(p);
         return page;

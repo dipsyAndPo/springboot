@@ -8,8 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Controller
@@ -56,6 +59,13 @@ public class HelloController {
     public String updateTypeInfo(TypeInfo typeInfo){
         ddd.update(typeInfo);
         return "redirect:findAll";
+    }
+
+    @RequestMapping(value = "upload",method = RequestMethod.POST)
+    public String upload(HttpServletRequest req, @RequestParam("file")MultipartFile file,Model m){
+
+            String fileName=System.currentTimeMillis()+file.getOriginalFilename();
+        return "showImg";
     }
 
 }

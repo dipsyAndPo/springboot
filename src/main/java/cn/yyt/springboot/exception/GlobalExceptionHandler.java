@@ -11,6 +11,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(value = Exception.class)
     public ModelAndView defaultErrorHadler(HttpServletRequest request,Exception e){
+        //全局错误处理，错误自动跳到errorPage页面
         ModelAndView mav=new ModelAndView();
         mav.addObject("exception",e);
         mav.addObject("url", request.getRequestURL());
