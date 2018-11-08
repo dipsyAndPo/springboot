@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="/js/jquery.min.js" type="text/javascript"></script>
+</head>
+<body>
+<input type="button" value="获取全部">
+<p></p>
+</body>
+<script type="text/javascript">
+    $("input").click(function () {
+        var url="/ajaxTypeInfo?start=0&size=100";
+        $.get(
+            url,
+            function (result) {
+                var p="";
+                for (i in result){
+                    var typeInfo = result[i];
+                    p=p+"id是"+typeInfo.typeId+"名字是"+typeInfo.typeName+"<br>";
+                }
+                $("p").html("结果是"+p);
+            }
+        );
+
+    });
+</script>
+</html>

@@ -1,10 +1,12 @@
 package cn.yyt.springboot.web;
 
-import cn.yyt.springboot.mapper.TypeInfoMapper;
+import cn.yyt.springboot.dao.TypeInfoDao;
 import cn.yyt.springboot.pojo.TypeInfo;
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -14,13 +16,12 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.List;
 
 @Controller
 public class HelloController {
 
     @Autowired
-    TypeInfoMapper ddd;
+    TypeInfoDao ddd;
     @RequestMapping("toPage")
     public String toPage(String url){
         return url;
@@ -40,25 +41,25 @@ public class HelloController {
     }
     @PutMapping("TypeInfos/{typeId}")
     public String updateTypeInfo(TypeInfo typeInfo){
-        ddd.update(typeInfo);
+        //Jpa的添加和修改用的都是sava，根据传入的实体类有没有id来判断的
+        ddd.save(typeInfo);
         return "redirect:/TypeInfos";
     }
     @GetMapping("TypeInfos/{typeId}")
     public String  getTypeInfo(@PathVariable("typeId") int typeId,Model m){
-        TypeInfo typeInfo = ddd.get(typeId);
+        TypeInfo typeInfo = ddd.findOne(typeId);
         m.addAttribute("typeInfo",typeInfo);
         return "editTypeInfo";
     }
     @GetMapping("TypeInfos") //在参数里接受当前是第几页 start ，以及每页显示多少条数据 size。 默认值分别是0和5。
     public String hello(Model m, @RequestParam(value = "start",defaultValue = "0") int start,@RequestParam(value = "size",defaultValue = "5")int size){
-        PageHelper.startPage(start,size,"typeId asc");// 根据start,size进行分页，并且设置id 倒排序
-        List<TypeInfo> infos = ddd.findAll();//查询全部
-        PageInfo<TypeInfo> page = new PageInfo<>(infos);//因为PageHelper的作用，这里就会返回当前分页的集合了
+        start=start<0?0:start;//如果start小于0就让他等于0
+        Sort sort=new Sort(Sort.Direction.DESC,"typeId");
+        Pageable pageable=new PageRequest(start,size,sort);
+        Page<TypeInfo> page = ddd.findAll(pageable);
         m.addAttribute("page",page);
         return "listTypeInfo";
     }
-
-
 
     @RequestMapping(value = "upload",method = RequestMethod.POST)
     public String upload(HttpServletRequest req, @RequestParam("file")MultipartFile file,Model m){

@@ -1,8 +1,18 @@
 package cn.yyt.springboot.pojo;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "typeinfo")
+@JsonIgnoreProperties({ "handler","hibernateLazyInitializer" })
 public class TypeInfo {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "typeid")
     private int typeId;
+    @Column(name = "typename")
     private String typeName;
 
 

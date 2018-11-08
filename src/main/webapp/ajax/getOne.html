@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="/js/jquery.min.js" type="text/javascript"></script>
+</head>
+<body>
+    id:<input type="text" id="typeId" >
+    <input id="but" type="button" value="通过上面id获取一个值">
+<p></p>
+</body>
+<script type="text/javascript">
+   $("#but").click(function () {
+       var typeId=$("#typeId").val();
+       var url="/ajaxTypeInfo/"+typeId;
+       $.get(
+           url,
+           function (result) {
+
+               $("p").html("结果是"+result.typeId+"名字是:"+result.typeName);
+           }
+       );
+
+   });
+</script>
+</html>
