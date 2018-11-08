@@ -13,13 +13,10 @@
 <body>
 <div style="margin:0px auto; width:500px">
 
-    <form action="updateTypeInfo" method="post">
-
+    <form action="/TypeInfos/${typeInfo.typeId}" method="POST">
+        <input type="hidden" name="_method" value="PUT">
         name: <input name="typeName" value="${typeInfo.typeName}"> <br>
-
-        <input name="typeId" type="hidden" value="${typeInfo.typeId}">
         <button type="submit">提交</button>
-
     </form>
 </div>
 </body>

@@ -10,9 +10,19 @@
 <html>
 <head>
     <title>Title</title>
+    <script src="js/jquery.min.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        $(function () {
+            /*将post method 改变为delete*/
+            $(".delete").click(function () {
+                var href=$(this).attr("href");
+                $("#fromdelete").attr("action",href).submit();
+                return false;
+            });
+        });
+    </script>
 </head>
 <body>
-<a href="toPage?url=insertTypeInfo">添加</a>
 <table align='center' border='1' cellspacing='0'>
     <tr>
         <td>id</td>
@@ -24,8 +34,8 @@
         <tr>
             <td>${c.typeId}</td>
             <td>${c.typeName}</td>
-            <td><a href="getTypeInfo?typeId=${c.typeId}">编辑</a></td>
-            <td><a href="deleteTypeInfo?typeId=${c.typeId}">删除</a></td>
+            <td><a href="TypeInfos/${c.typeId}">编辑</a></td>
+            <td><a class="delete" href="TypeInfos/${c.typeId}">删除</a></td>
         </tr>
     </c:forEach>
 </table>
@@ -39,5 +49,16 @@
     <a href="?start=${page.pageNum+1}">下一页</a>
     <a href="?start=${page.pages}">末页</a>
 </div>
+<br><br><br>
+<form action="TypeInfos" method="post" align="center">
+    <h3>添加</h3>
+    name: <input name="typeName" >
+    <button type="submit">提交</button>
+</form>
+
+
+<form id="fromdelete" action="" method="POST">
+    <input type="hidden" name="_method" value="DELETE">
+</form>
 </body>
 </html>
