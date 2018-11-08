@@ -8,4 +8,4 @@ springboot框架练习
 <ul>
     <li>分页增删改查</li>
     <li>上传图片</li>
-    <li></li>
+    <li>1</li>
