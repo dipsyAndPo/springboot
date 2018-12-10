@@ -9,5 +9,5 @@ public interface TypeInfoDao extends JpaRepository<TypeInfo,Integer> {
 
 
 
-    
+
 }
