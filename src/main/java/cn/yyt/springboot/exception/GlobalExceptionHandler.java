@@ -16,6 +16,7 @@ public class GlobalExceptionHandler {
         mav.addObject("exception",e);
         mav.addObject("url", request.getRequestURL());
         mav.setViewName("errorPage");
+
         return mav;
     }
 }
