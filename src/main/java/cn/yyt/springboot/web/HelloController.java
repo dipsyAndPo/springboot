@@ -58,6 +58,7 @@ public class HelloController {
         Pageable pageable=new PageRequest(start,size,sort);
         Page<TypeInfo> page = ddd.findAll(pageable);
         m.addAttribute("page",page);
+
         return "listTypeInfo";
     }
 
