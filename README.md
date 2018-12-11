@@ -8,4 +8,4 @@ springboot框架练习
 <ul>
     <li>Restful风格增删改查(带分页)</li>
     <li>上传图片</li>
-  
+   <li>上传图片</li>
