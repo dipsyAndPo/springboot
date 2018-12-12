@@ -29,16 +29,11 @@
     <button type="button" onclick="select(0,3)">末页</button>
 </div>
 <br><br><br>
-<form action="TypeInfos" method="post" align="center">
+<div align="center">
     <h3>添加</h3>
-    name: <input name="typeName" >
-    <button type="submit">提交</button>
-</form>
-
-
-<form id="fromdelete" action="" method="POST">
-    <input type="hidden" name="_method" value="DELETE">
-</form>
+    name: <input name="typeName" id="typeName">
+    <button type="button" onclick="tijiao()">提交</button>
+</div>
 
 </body>
 
@@ -46,6 +41,21 @@
     $(function () {
         select(0);
     });
+    
+    function tijiao() {
+        var typeName=$("#typeName").val();
+        $.ajax({
+            method:"post",
+            url:"TypeInfos",
+            data:{"typeName":typeName},
+            success:function (re) {
+                alert(re);
+                var dangqian=$("#dangqian").html();
+                select(dangqian-1);
+            }
+        });
+        $("#typeName").val("");
+    }
 
 
         function select (start,flag) {//flag 1为上一页2为下一页3为尾页
@@ -71,7 +81,7 @@
                         $("tbody").append($("<tr>" +
                             "<td>"+content[i].typeId+"</td>" +
                             "<td>"+content[i].typeName+"</td>" +
-                            "<td><button type='button' onclick=' edit ("+content[i].typeId+",$(this));'>编辑</button></td>" +
+                            "<td><button type='button' onclick=' edit ("+content[i].typeId+",this);'>编辑</button></td>" +
                             "<td><button type='button'  onclick='shan ("+content[i].typeId+");'>删除</button></td>" +
                             "</tr>"));
                     }
@@ -81,8 +91,7 @@
         }
         
         function edit(id,aa) {
-            var typeName = prompt("请输入要修改的名字,原名字为:"+$(aa).prev().html());
-            alert($(aa).prev().css({"color":"red","border":"2px solid red"}));
+            var typeName = prompt("请输入要修改的名字,原名字为:"+$(aa).parent().prev().html());
             if(typeName!=null){
                 $.ajax({
                     method:"put",

@@ -16,10 +16,6 @@ public class AjaxController {
     @Autowired TypeInfoDao ddd;
 
 
-    @PostMapping("ajaxTypeInfo")
-    public void addTypeInfo(@RequestBody TypeInfo typeInfo){
-        System.out.println("springboot接收到了来自前台的信息"+typeInfo);
-    }
 
     @GetMapping("ajaxTypeInfo/{typeId}")
     public TypeInfo  getTypeInfo(@PathVariable("typeId") int typeId){
@@ -48,6 +44,12 @@ public class AjaxController {
     @PutMapping("TypeInfos/{typeId}")
     public String updateTypeInfo(TypeInfo typeInfo){
         //Jpa的添加和修改用的都是sava，根据传入的实体类有没有id来判断的
+        ddd.save(typeInfo);
+        return "success";
+    }
+
+    @PostMapping("TypeInfos")
+    public String addTypeInfo(TypeInfo typeInfo){
         ddd.save(typeInfo);
         return "success";
     }

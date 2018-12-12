@@ -23,20 +23,7 @@ public class HelloController {
         return url;
     }
 
-    @PostMapping("TypeInfos")
-    public String addTypeInfo(TypeInfo typeInfo){
-        ddd.save(typeInfo);
-        return "redirect:/TypeInfos";
-    }
 
-
-
-    @GetMapping("TypeInfos/{typeId}")
-    public String  getTypeInfo(@PathVariable("typeId") int typeId,Model m){
-        TypeInfo typeInfo = ddd.findOne(typeId);
-        m.addAttribute("typeInfo",typeInfo);
-        return "editTypeInfo";
-    }
 
 
     @RequestMapping(value = "upload",method = RequestMethod.POST)
