@@ -1,0 +1,43 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../../js/jquery.min.js" type="text/javascript"></script>
+</head>
+<body>
+<table align='center' border='1' cellspacing='0'>
+    <thead>
+    <tr>
+        <td>id</td>
+        <td>name</td>
+        <td>编辑</td>
+        <td>删除</td>
+    </tr>
+    </thead>
+    <tbody>
+        <tr th:each="${}">
+
+
+        </tr>
+    </tbody>
+</table>
+
+<br>
+
+<div align="center">
+    当前第<span id="dangqian"></span>页，共<span id="yigong"></span>页
+    <button type="button" onclick="select(0)">首页</button>
+    <button type="button" onclick="select(0,1)">上一页</button>
+    <button type="button" onclick="select(0,2)">下一页</button>
+    <button type="button" onclick="select(0,3)">末页</button>
+</div>
+<br><br><br>
+<div align="center">
+    <h3>添加</h3>
+    name: <input name="typeName" id="typeName">
+    <button type="button" onclick="tijiao()">提交</button>
+</div>
+
+</body>
+
+</html>

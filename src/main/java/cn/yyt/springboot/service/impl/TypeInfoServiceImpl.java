@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -20,8 +21,9 @@ public class TypeInfoServiceImpl implements TypeInfoService {
     @Override
     @Cacheable(key="'TypeInfo '+#p0.offset + '-' + #p0.pageSize ")
     public Page4Navigator<TypeInfo> list(Pageable pageable) {
-
-        return null;
+        Page<TypeInfo> pageFromJpa = dao.findAll(pageable);
+        Page4Navigator<TypeInfo> page4Navigator=new Page4Navigator<>(pageFromJpa,5);
+        return page4Navigator;
     }
 
     @Override
