@@ -13,6 +13,7 @@ public class PageHelperConfig {
 
     @Bean   //表示启动这个拦截器
     public PageHelper pageHelper() {
+        
         PageHelper page = new PageHelper();
         Properties p = new Properties();
         //offsetAsPageNum:设置为true时，会将RowBounds第一个参数offset当成pageNum页码使用.
