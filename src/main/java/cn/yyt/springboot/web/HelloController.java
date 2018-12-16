@@ -19,6 +19,9 @@ public class HelloController {
 
     //@Autowired TypeInfoDao ddd;
     @Autowired TypeInfoService service;
+
+
+
     @RequestMapping("toPage")
     public String toPage(String url){
         return url;
@@ -41,7 +44,7 @@ public class HelloController {
             e.printStackTrace();
             return "上传失败," + e.getMessage();
         }
-        return "showImg";
+        return "/showImg.jsp";
     }
 
 }

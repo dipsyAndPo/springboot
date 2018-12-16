@@ -14,7 +14,8 @@ import java.util.List;
 @RestController
 public class AjaxController {
     //@Autowired TypeInfoDao ddd;
-    @Autowired TypeInfoService service;
+    @Autowired
+    TypeInfoService service;
 
 
 

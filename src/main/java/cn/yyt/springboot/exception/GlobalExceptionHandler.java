@@ -15,7 +15,7 @@ public class GlobalExceptionHandler {
         ModelAndView mav=new ModelAndView();
         mav.addObject("exception",e);
         mav.addObject("url", request.getRequestURL());
-        mav.setViewName("errorPage");
+        mav.setViewName("/errorPage.jsp");
 
         return mav;
     }
